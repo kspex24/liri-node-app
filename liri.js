@@ -71,23 +71,25 @@ switch (command) {
                 console.log("===============================================================================".cyan.bold)
 
                 var logTxt =
-                "\nDate: " +
-                tweet[i].created_at+
-                " Tweet: " +
-                tweet[i].text+
-                "===================end of entry====================="
-          
-              fs.appendFile("log.txt", logTxt, function(err) {
-                if (err) throw err;
-              });
+                 "\nDate: " + tweet[i].created_at + " Tweet: " + tweet[i].text
+
+                fs.appendFile("log.txt", logTxt, function (err) {
+                    if (err) throw err;
+                });
 
             }
+            var logTxt =
+            "\n========end========" 
+
+           fs.appendFile("log.txt", logTxt, function (err) {
+               if (err) throw err;
+           });
             if (error) {
                 console.log("Error occurred.")
             }
         });
 
-   
+
         break;
 
     case "spotify-this-song":
@@ -109,6 +111,14 @@ switch (command) {
                 console.log("Preview Link: " + (data).tracks.items[0].preview_url);
                 console.log("Artists: " + (data).tracks.items[0].artists[0].name);
                 console.log("----------------------------------------------------------------------------".green.bold);
+
+                var logTxt =
+                "\n====New Entry======" + "Album Name: " + (data).tracks.items[0].album.name + " Song Name: " + (data).tracks.items[0].name + " Artists: " + (data).tracks.items[0].artists[0].name 
+                + "\nPreview Link: " + (data).tracks.items[0].preview_url + "\n====End======"
+
+            fs.appendFile("log.txt", logTxt, function (err) {
+                if (err) throw err;
+            });
             })
         }
 
@@ -126,6 +136,14 @@ switch (command) {
                 console.log("Preview Link: " + (data).tracks.items[0].preview_url);
                 console.log("Artists: " + (data).tracks.items[0].artists[0].name);
                 console.log("----------------------------------------------------------------------------".green.bold);
+
+                var logTxt =
+                "\n====New Entry======" + "Album Name: " + (data).tracks.items[0].album.name + " Song Name: " + (data).tracks.items[0].name + " Artists: " + (data).tracks.items[0].artists[0].name 
+                + "\nPreview Link: " + (data).tracks.items[0].preview_url + "\n====End======"
+
+            fs.appendFile("log.txt", logTxt, function (err) {
+                if (err) throw err;
+            });
             })
         };
 
@@ -153,6 +171,14 @@ switch (command) {
                 console.log("Actors: " + JSON.parse(body).Actors);
                 console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
                 console.log("----------------------------------------------------------------------------".magenta.bold);
+
+                var logTxt =
+                    "\n====New Entry======" + "\nTitle: " + JSON.parse(body).Title + " Year: " + JSON.parse(body).Year + " IMDB Rating: " + JSON.parse(body).imdbRating + " Country: " + JSON.parse(body).Country +
+                    " Language: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors: " + JSON.parse(body).Actors + " Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n====End======"
+
+                fs.appendFile("log.txt", logTxt, function (err) {
+                    if (err) throw err;
+                });
             })
         }
         //this request for when a specific movie IS entered
@@ -160,7 +186,7 @@ switch (command) {
 
             request(movieQueryUrl, function (error, response, body) {
                 // If the request is successful (i.e. if the response status code is 200)
-               
+
                 if (!error && response.statusCode === 200) {
                 }
                 // Parse the body of the site and recover just the imdbRating
@@ -176,6 +202,14 @@ switch (command) {
                 console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
                 console.log("----------------------------------------------------------------------------".magenta.bold);
 
+
+                var logTxt =
+                    "\n====New Entry======" + "\nTitle: " + JSON.parse(body).Title + " Year: " + JSON.parse(body).Year + " IMDB Rating: " + JSON.parse(body).imdbRating + " Country: " + JSON.parse(body).Country +
+                    " Language: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors: " + JSON.parse(body).Actors + " Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n====End======"
+
+                fs.appendFile("log.txt", logTxt, function (err) {
+                    if (err) throw err;
+                });
             });
         }
         break;
@@ -211,6 +245,14 @@ switch (command) {
                 console.log("Preview Link: " + (data).tracks.items[0].preview_url);
                 console.log("Artists: " + (data).tracks.items[0].artists[0].name);
                 console.log("----------------------------------------------------------------------------".green.bold);
+
+                var logTxt =
+                "\n====New Entry======" + "Album Name: " + (data).tracks.items[0].album.name + " Song Name: " + (data).tracks.items[0].name + " Artists: " + (data).tracks.items[0].artists[0].name 
+                + "\nPreview Link: " + (data).tracks.items[0].preview_url + "\n====End======"
+
+            fs.appendFile("log.txt", logTxt, function (err) {
+                if (err) throw err;
+            });
             });
 
         });
