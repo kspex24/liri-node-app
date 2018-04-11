@@ -5,6 +5,10 @@ var fs = require("fs");
 
 var request = require("request");
 
+var colors = require('colors');
+
+var inquirer = require('inquirer');
+
 var command = process.argv[2]
 
 var value1 = process.argv[3]
@@ -19,22 +23,34 @@ var noMovieQueryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey
 
 var movieQueryUrl = "http://www.omdbapi.com/?t=" + value1 + "&y=&plot=short&apikey=trilogy";
 
-// var noSongQueryUrl = "https://api.spotify.com/v1/search?q=name:The+Sign&type:track&artist:Ace+of+Base"
+// inquirer
+//   .prompt([
+//     // List of commands to choose from
+//     {
 
-// var songQueryUrl = "https://api.spotify.com/v1/tracks/search?q=name:" + value1;
+//       type: "list",
+//       message: "Greetings! Please choose a command.",
+//       choices: ["my-tweets", "spotify-this-song", "movie-this", "do-what-it-says"],
+//       name: "command"
+//     }]
+//     .then(function(inquirerResponse) {
+//         // If the inquirerResponse confirms, we displays the i
+//         console.log(inquirerResponse.command) 
 
-//Print functions
-function printMovieInfo() {
+//       })
 
-    console.log("Title: " + JSON.parse(body).Title);
-    console.log("Year: " + JSON.parse(body).Year);
-    console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-    console.log("Country: " + JSON.parse(body).Country);
-    console.log("Language: " + JSON.parse(body).Language);
-    console.log("Plot: " + JSON.parse(body).Plot);
-    console.log("Actors: " + JSON.parse(body).Actors);
-    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-}
+//     inquirer
+//   .prompt([
+//     // Here we create a basic text prompt.
+//     {
+//       type: "input",
+//       message: "Please enter your search choice:",
+//       name: "value1"
+//     }
+// ])
+//     .then(function(inquirerResponse) {
+//     
+//     });
 
 // Write switch case to take in user input and respond accordingly:
 
@@ -46,18 +62,32 @@ switch (command) {
         var client = new Twitter(keys.twitter);
         var params = { screen_name: 'kspex24' };
         client.get('statuses/user_timeline', params, function (error, tweet, response) {
-            console.log("Tweets from kspex24");
-            console.log("===============================================================================")
+            console.log("Tweets from kspex24".cyan.bold);
+            console.log("===============================================================================".cyan.bold)
 
             for (i = 0; i < 20; i++) {
                 console.log("Created: " + tweet[i].created_at)
                 console.log("Tweet: " + tweet[i].text)
-                console.log("===============================================================================")
+                console.log("===============================================================================".cyan.bold)
+
+                var logTxt =
+                "\nDate: " +
+                tweet[i].created_at+
+                " Tweet: " +
+                tweet[i].text+
+                "===================end of entry====================="
+          
+              fs.appendFile("log.txt", logTxt, function(err) {
+                if (err) throw err;
+              });
+
             }
             if (error) {
                 console.log("Error occurred.")
             }
         });
+
+   
         break;
 
     case "spotify-this-song":
@@ -65,32 +95,37 @@ switch (command) {
 
         var spotify = new Spotify(keys.spotify);
 
+        //request when song NOT specified
+
         if (value1 === undefined) {
             spotify.search({ type: 'track', query: "The Sign" && "Ace of Base" }, function (err, data) {
                 if (err) {
                     return console.log('Error occurred: ' + err);
                 }
-                console.log("Song Info:");
-                console.log("----------------------------------------------------------------------------");
+                console.log("Song Info:".green.bold);
+                console.log("----------------------------------------------------------------------------".green.bold);
                 console.log("Album Name: " + (data).tracks.items[0].album.name);
                 console.log("Song Name: " + (data).tracks.items[0].name);
                 console.log("Preview Link: " + (data).tracks.items[0].preview_url);
                 console.log("Artists: " + (data).tracks.items[0].artists[0].name);
-                console.log("----------------------------------------------------------------------------");
+                console.log("----------------------------------------------------------------------------".green.bold);
             })
         }
+
+        //request when song IS specified
+
         else {
             spotify.search({ type: 'track', query: value1 }, function (err, data) {
                 if (err) {
                     return console.log('Error occurred: ' + err);
                 }
-                console.log("Song Info:");
-                console.log("----------------------------------------------------------------------------");
+                console.log("Song Info:".green.bold);
+                console.log("----------------------------------------------------------------------------".green.bold);
                 console.log("Album Name: " + (data).tracks.items[0].album.name);
                 console.log("Song Name: " + (data).tracks.items[0].name);
                 console.log("Preview Link: " + (data).tracks.items[0].preview_url);
                 console.log("Artists: " + (data).tracks.items[0].artists[0].name);
-                console.log("----------------------------------------------------------------------------");
+                console.log("----------------------------------------------------------------------------".green.bold);
             })
         };
 
@@ -98,7 +133,7 @@ switch (command) {
 
     case "movie-this":
         //call to OMDB for movie info
-        //this request if for when a specific movie is NOT entered
+        //this requestfor when a specific movie is NOT entered
 
         if (value1 === undefined) {
             request(noMovieQueryUrl, function (error, response, body) {
@@ -107,8 +142,8 @@ switch (command) {
                 if (!error && response.statusCode === 200) {
 
                 }
-                console.log("Movie Info:");
-                console.log("----------------------------------------------------------------------------");
+                console.log("Movie Info:".magenta.bold);
+                console.log("----------------------------------------------------------------------------".magenta.bold);
                 console.log("Title: " + JSON.parse(body).Title);
                 console.log("Year: " + JSON.parse(body).Year);
                 console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
@@ -117,19 +152,20 @@ switch (command) {
                 console.log("Plot: " + JSON.parse(body).Plot);
                 console.log("Actors: " + JSON.parse(body).Actors);
                 console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-                console.log("----------------------------------------------------------------------------");
+                console.log("----------------------------------------------------------------------------".magenta.bold);
             })
         }
-        //this request if for when a specific movie IS entered
+        //this request for when a specific movie IS entered
         else {
 
             request(movieQueryUrl, function (error, response, body) {
                 // If the request is successful (i.e. if the response status code is 200)
+               
                 if (!error && response.statusCode === 200) {
                 }
                 // Parse the body of the site and recover just the imdbRating
-                console.log("Movie Info:");
-                console.log("----------------------------------------------------------------------------");
+                console.log("Movie Info:".magenta.bold);
+                console.log("----------------------------------------------------------------------------".magenta.bold);
                 console.log("Title: " + JSON.parse(body).Title);
                 console.log("Year: " + JSON.parse(body).Year);
                 console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
@@ -138,7 +174,7 @@ switch (command) {
                 console.log("Plot: " + JSON.parse(body).Plot);
                 console.log("Actors: " + JSON.parse(body).Actors);
                 console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-                console.log("----------------------------------------------------------------------------");
+                console.log("----------------------------------------------------------------------------".magenta.bold);
 
             });
         }
@@ -163,16 +199,18 @@ switch (command) {
             var spotify = new Spotify(keys.spotify);
 
             spotify.search({ type: 'track', query: value1 }, function (err, data) {
+
                 if (err) {
                     return console.log('Error occurred: ' + err);
                 }
-                console.log("Song Info:");
-                console.log("----------------------------------------------------------------------------")
+
+                console.log("Song Info:".green.bold);
+                console.log("----------------------------------------------------------------------------".green.bold)
                 console.log("Album Name: " + (data).tracks.items[0].album.name);
                 console.log("Song Name: " + (data).tracks.items[0].name);
                 console.log("Preview Link: " + (data).tracks.items[0].preview_url);
                 console.log("Artists: " + (data).tracks.items[0].artists[0].name);
-                console.log("----------------------------------------------------------------------------");
+                console.log("----------------------------------------------------------------------------".green.bold);
             });
 
         });
@@ -181,3 +219,27 @@ switch (command) {
     default:
 
 }
+
+//Print functions
+// function printMovieInfo() {
+
+//     console.log("Title: " + JSON.parse(body).Title);
+//     console.log("Year: " + JSON.parse(body).Year);
+//     console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+//     console.log("Country: " + JSON.parse(body).Country);
+//     console.log("Language: " + JSON.parse(body).Language);
+//     console.log("Plot: " + JSON.parse(body).Plot);
+//     console.log("Actors: " + JSON.parse(body).Actors);
+//     console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+// }
+
+// function printSongInfo() {
+//     console.log("Song Info:".green.bold);
+//     console.log("----------------------------------------------------------------------------".green.bold)
+//     console.log("Album Name: " + (data).tracks.items[0].album.name);
+//     console.log("Song Name: " + (data).tracks.items[0].name);
+//     console.log("Preview Link: " + (data).tracks.items[0].preview_url);
+//     console.log("Artists: " + (data).tracks.items[0].artists[0].name);
+//     console.log("----------------------------------------------------------------------------".green.bold);
+
+// }

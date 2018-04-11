@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/kspex24/liri-node-app#readme",
   "dependencies": {
+    "colors": "^1.2.1",
     "dotenv": "^5.0.1",
     "fs": "0.0.1-security",
+    "inquirer": "^5.2.0",
     "node-spotify-api": "^1.0.7",
     "request": "^2.85.0",
     "twitter": "^1.7.1"
