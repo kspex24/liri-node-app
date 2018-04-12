@@ -30,6 +30,10 @@ The goal of this project is to continue gaining experience with node and the dif
 
 Sample screens below:
 
+<p>
+    <img src="/images/lirinode1.png" width="220" height="240" />
+</p>
+
 ![alt inquirerchoiceprompt]
 (https://kspex24.github.io/liri-node-app/images/lirinode1.png)
 
