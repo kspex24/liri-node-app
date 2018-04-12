@@ -34,20 +34,23 @@ Sample screens below:
     <img src="/images/lirinode1.png" width="220" height="240" />
 </p>
 
-![alt inquirerchoiceprompt]
-(https://kspex24.github.io/liri-node-app/images/lirinode1.png)
+<p>
+    <img src="/images/lirinode2.png" width="220" height="240" />
+</p>
 
-![alt my-tweets]
-(https://kspex24.github.io/liri-node-app/images/lirinode2.png)
+<p>
+    <img src="/images/lirinode3.png" width="220" height="240" />
+</p>
 
-![alt spotify-this-song]
-(https://kspex24.github.io/liri-node-app/images/lirinode3.png)
+<p>
+    <img src="/images/lirinode4.png" width="220" height="240" />
+</p>
 
-![alt movie-this]
-(https://kspex24.github.io/liri-node-app/images/lirinode4.png)
+<p>
+    <img src="/images/lirinode5.png" width="220" height="240" />
+</p>
 
-![alt do-what-it-says]
-(https://kspex24.github.io/liri-node-app/images/lirinode5.png)
+
 
 
 
