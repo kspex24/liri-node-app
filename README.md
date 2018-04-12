@@ -34,16 +34,16 @@ Sample screens below:
 (https://kspex24.github.io/liri-node-app/images/lirinode1.png)
 
 ![alt my-tweets]
-(https://github.com/kspex24/liri-node-app/tree/master/images/lirinode2.png)
+(https://kspex24.github.io/liri-node-app/images/lirinode2.png)
 
 ![alt spotify-this-song]
-(https://github.com/kspex24/liri-node-app/tree/master/images/lirinode3.png)
+(https://kspex24.github.io/liri-node-app/images/lirinode3.png)
 
 ![alt movie-this]
-(https://github.com/kspex24/liri-node-app/tree/master/images/lirinode4.png)
+(https://kspex24.github.io/liri-node-app/images/lirinode4.png)
 
 ![alt do-what-it-says]
-(https://github.com/kspex24/liri-node-app/tree/master/images/lirinode5.png)
+(https://kspex24.github.io/liri-node-app/images/lirinode5.png)
 
 
 
