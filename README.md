@@ -31,7 +31,7 @@ The goal of this project is to continue gaining experience with node and the dif
 Sample screens below:
 
 ![alt inquirerchoiceprompt]
-(/images/lirinode1.png)
+(https://github.com/kspex24/liri-node-app/tree/master/images/lirinode1.png)
 
 ![alt my-tweets]
 (https://github.com/kspex24/liri-node-app/tree/master/images/lirinode2.png)
