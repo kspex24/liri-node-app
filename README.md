@@ -28,4 +28,7 @@ What is the goal of this project?
 
 The goal of this project is to continue gaining experience with node and the different packages available.  Packages used in this app include fs, request, colors, inquirer, Twitter and Spotify.
 
+![Image of screen1](https://github.com/kspex24/liri-node-app/images/lirinode1.png)
+
+
 
