@@ -30,19 +30,19 @@ The goal of this project is to continue gaining experience with node and the dif
 
 Sample screens below:
 
-![alt screen1]
-(https://github.com/kspex24/liri-node-app/images/lirinode1.png)
+![alt inquirerchoiceprompt]
+(https://github.com/kspex24/liri-node-app/tree/master/images/lirinode1.png)
 
-![alt screen2]
+![alt my-tweets]
 (https://github.com/kspex24/liri-node-app/tree/master/images/lirinode2.png)
 
-![alt screen3]
+![alt spotify-this-song]
 (https://github.com/kspex24/liri-node-app/tree/master/images/lirinode3.png)
 
-![alt screen4]
+![alt movie-this]
 (https://github.com/kspex24/liri-node-app/tree/master/images/lirinode4.png)
 
-![alt screen5]
+![alt do-what-it-says]
 (https://github.com/kspex24/liri-node-app/tree/master/images/lirinode5.png)
 
 
