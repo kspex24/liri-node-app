@@ -44,8 +44,7 @@ inquirer.prompt([
                 console.log("===============================================================================".cyan.bold)
 
                 for (i = 0; i < 20; i++) {
-                    console.log("Created: " + tweet[i].created_at)
-                    console.log("Tweet: " + tweet[i].text)
+                    console.log("Created: " + tweet[i].created_at + "\nTweet: " + tweet[i].text)
                     console.log("===============================================================================".cyan.bold)
 
                     var logTxt =
@@ -85,31 +84,16 @@ inquirer.prompt([
 
                 //call to spotify for song info, execute function to display in terminal and append search data to log.txt
 
-                var spotify = new Spotify(keys.spotify);
-
-                //request when song NOT specified
+                //request when song NOT specified, assign value
 
                 if (value1 === "") {
-                    spotify.search({ type: 'track', query: "The Sign" && "Ace of Base" }, function (err, data) {
+                    value1 = "The Sign" && "Ace of Base"
 
-                        if (err) {
-                            return console.log('Error occurred: ' + err);
-                        }
-                        printSongInfo(data);
-
-                    })
+                    songFinder(value1);
                 }
 
-                //request when song IS specified, execute function to display in terminal and append search data to log.txt
-
                 else {
-
-                    spotify.search({ type: 'track', query: value1 }, function (err, data) {
-                        if (err) {
-                            return console.log('Error occurred: ' + err);
-                        }
-                        printSongInfo(data);
-                    })
+                    songFinder(value1);
                 };
             })
             break;
@@ -130,28 +114,15 @@ inquirer.prompt([
                 var value1 = Response.movie
 
 
-                //call to OMDB for movie info
-                //this request for when a specific movie is NOT entered, display in terminal and append search data to log.txt
-
+                //set value1 for call OMDB for movie info; this request for when a specific movie is NOT entered.
                 if (value1 === "") {
-                    request("http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy", function (error, response, body) {
-
-                        // If the request is successful (i.e. if the response status code is 200)
-                        if (!error && response.statusCode === 200) {
-                        }
-                        printMovieInfo(body);
-                    })
+                    value1 = "Mr. Nobody"
+                    searchMovie(value1);
                 }
-                //this request for when a specific movie IS entered, display in terminal and append search data to log.txt
+                //this request for when a specific movie IS entered.
                 else {
 
-                    request("http://www.omdbapi.com/?t=" + value1 + "&y=&plot=short&apikey=trilogy", function (error, response, body) {
-                        // If the request is successful (i.e. if the response status code is 200)
-
-                        if (!error && response.statusCode === 200) {
-                        }
-                        printMovieInfo(body);
-                    });
+                    searchMovie(value1);
                 }
             });
             break;
@@ -168,18 +139,9 @@ inquirer.prompt([
 
                 // Split the data in random.txt by commas (to make it more readable)
                 var dataArr = data.split(",");
-
                 value1 = dataArr[1]
 
-                var spotify = new Spotify(keys.spotify);
-
-                spotify.search({ type: 'track', query: value1 }, function (err, data) {
-
-                    if (err) {
-                        return console.log('Error occurred: ' + err);
-                    }
-                    printSongInfo(data);
-                });
+                songFinder(value1);
             });
 
             break;
@@ -187,24 +149,44 @@ inquirer.prompt([
     }
 });
 
-//Print and log functions
+//Function to search movie database and execute printMovieInfo function
+function searchMovie(value1) {
+    request("http://www.omdbapi.com/?t=" + value1 + "&y=&plot=short&apikey=trilogy", function (error, response, body) {
+        // request("http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy", function (error, response, body) {
+
+        // If the request is successful (i.e. if the response status code is 200)
+        if (!error && response.statusCode === 200) {
+        }
+        printMovieInfo(body);
+    })
+}
+
+//Function to search song database and execute printSongInfo function
+function songFinder(value1) {
+    var spotify = new Spotify(keys.spotify);
+
+    spotify.search({ type: 'track', query: value1 }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+        printSongInfo(data);
+    })
+}
+
+//Print and log functions. Display in terminal and append search data to log.txt
 function printMovieInfo(body) {
 
     console.log("Movie Info:".magenta.bold);
     console.log("----------------------------------------------------------------------------".magenta.bold);
-    console.log("Title: " + JSON.parse(body).Title);
-    console.log("Year: " + JSON.parse(body).Year);
-    console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-    console.log("Country: " + JSON.parse(body).Country);
-    console.log("Language: " + JSON.parse(body).Language);
-    console.log("Plot: " + JSON.parse(body).Plot);
-    console.log("Actors: " + JSON.parse(body).Actors);
-    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+    console.log("Title: " + JSON.parse(body).Title + "\nYear: " + JSON.parse(body).Year + "\nIMDB Rating: " + JSON.parse(body).imdbRating + "\nCountry: "
+        + JSON.parse(body).Country + "\Language: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors: " 
+        + JSON.parse(body).Actors + "\nRotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
     console.log("----------------------------------------------------------------------------".magenta.bold);
 
     var logTxt =
-        "\n====New Entry======" + "\nTitle: " + JSON.parse(body).Title + " Year: " + JSON.parse(body).Year + " IMDB Rating: " + JSON.parse(body).imdbRating + " Country: " + JSON.parse(body).Country +
-        " Language: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors: " + JSON.parse(body).Actors + " Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n====End======"
+        "\n====New Entry======" + "\nTitle: " + JSON.parse(body).Title + " Year: " + JSON.parse(body).Year + " IMDB Rating: " + JSON.parse(body).imdbRating 
+        + " Country: " + JSON.parse(body).Country + " Language: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors: "
+         + JSON.parse(body).Actors + " Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n====End======"
 
     fs.appendFile("log.txt", logTxt, function (err) {
         if (err) throw err;
@@ -214,17 +196,17 @@ function printMovieInfo(body) {
 function printSongInfo(data) {
     console.log("Song Info:".green.bold);
     console.log("----------------------------------------------------------------------------".green.bold)
-    console.log("Album Name: " + (data).tracks.items[0].album.name);
-    console.log("Song Name: " + (data).tracks.items[0].name);
-    console.log("Preview Link: " + (data).tracks.items[0].preview_url);
-    console.log("Artists: " + (data).tracks.items[0].artists[0].name);
+    console.log("Album Name: " + (data).tracks.items[0].album.name + "\nSong Name: " + (data).tracks.items[0].name + "\nPreview Link: " + (data).tracks.items[0].preview_url
+        + "\nArtists: " + (data).tracks.items[0].artists[0].name);
     console.log("----------------------------------------------------------------------------".green.bold);
 
     var logTxt =
-        "\n====New Entry======" + "Album Name: " + (data).tracks.items[0].album.name + " Song Name: " + (data).tracks.items[0].name + " Artists: " + (data).tracks.items[0].artists[0].name
+        "\n====New Entry======" + "Album Name: " + (data).tracks.items[0].album.name + " Song Name: " + (data).tracks.items[0].name + " Artists: " 
+        + (data).tracks.items[0].artists[0].name
         + "\nPreview Link: " + (data).tracks.items[0].preview_url + "\n====End======"
 
     fs.appendFile("log.txt", logTxt, function (err) {
         if (err) throw err;
     });
 }
+
