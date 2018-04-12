@@ -31,23 +31,23 @@ The goal of this project is to continue gaining experience with node and the dif
 Sample screens below:
 
 <p>
-    <img src="/images/lirinode1.png" width="220" height="240" />
+    <img src="https://github.com/kspex24/liri-node-app/blob/master/images/lirinode1.png">
 </p>
 
 <p>
-    <img src="/images/lirinode2.png" width="220" height="240" />
+    <img src="https://github.com/kspex24/liri-node-app/blob/master/images/lirinode2.png">
 </p>
 
 <p>
-    <img src="/images/lirinode3.png" width="220" height="240" />
+    <img src="https://github.com/kspex24/liri-node-app/blob/master/images/lirinode3.png">
 </p>
 
 <p>
-    <img src="/images/lirinode4.png" width="220" height="240" />
+    <img src="https://github.com/kspex24/liri-node-app/blob/master/images/lirinode4.png">
 </p>
 
 <p>
-    <img src="/images/lirinode5.png" width="220" height="240" />
+    <img src="https://github.com/kspex24/liri-node-app/blob/master/images/lirinode5.png">
 </p>
 
 
