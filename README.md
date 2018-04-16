@@ -51,6 +51,15 @@ Sample screens below:
 </p>
 
 
+![alt inquirerchoiceprompt] (https://kspex24.github.io/liri-node-app/images/lirinode1.png)
+
+![alt my-tweets] (https://kspex24.github.io/liri-node-app/images/lirinode2.png)
+
+![alt spotify-this-song] (https://kspex24.github.io/liri-node-app/images/lirinode3.png)
+
+![alt movie-this] (https://kspex24.github.io/liri-node-app/images/lirinode4.png)
+
+![alt do-what-it-says] (https://kspex24.github.io/liri-node-app/images/lirinode5.png)
 
 
 
